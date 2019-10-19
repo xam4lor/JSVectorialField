@@ -13,8 +13,7 @@ class Particle {
 
 
     update() {
-        this.acc.clear();
-        this.acc = getVectorFieldAt(this.pos.x, this.pos.y);
+        this.acc = this.pos.dist(getVectorFieldAt(this.pos)).div(1000).mult(c.particleSMult).mult(-1);
 
         this.speed.add(this.acc);
         this.pos.add(this.speed);
@@ -22,7 +21,7 @@ class Particle {
 
     draw() {
         noStroke();
-        fill(255, 0, 0);
+        fill(c.particleC[0], c.particleC[1], c.particleC[2]);
 
         let drawX = ((this.pos.x / c.plotZoom) * width)  + width / 2;
         let drawY = ((this.pos.y / c.plotZoom) * height) + height / 2;
